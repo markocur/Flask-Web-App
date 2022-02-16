@@ -1,0 +1,10 @@
+flask_sqlalchemy
+flask_login
+flask_ckeditor
+flask_wtf
+wtforms
+datetime
+
+
+
+

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block content %}
+       
+<style>
+    body {
+        background-image:url(/static/imgs/background.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+    }
+</style>
+
+{% if current_user.is_authenticated %}
+    <div class="row mt-5 text-center">
+        <h1 class="fw-bold display-1">Welcome, {{ current_user.username }}</h1>
+    </div>
+    <div class="row">
+        <h2 class="text-center">
+            Why Journalling?
+        </h2>
+        <div class="col-8 offset-2">
+            <p>
+                As nicely put by writer Christina Baldwin, a journal “allows us to leave a collection of still lifes that records our personal journeys”. Writing in a journal seems to address a fundamental human desire — self-expression. It also helps to reflect on the events that shape our lives. And travelling can have a huge impact on your live! Reading the entries later will allow you to relive those precious moments and the feelings they engendered. Don't wait until tomorrow and click below to add a new journal entry!
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3 text-center">
+            <a href="{{ url_for('create_post') }}">
+                <button type="button" class="btn btn-primary btn-lg">Add Entry</button>
+            </a>
+        </div>
+    </div>
+{% else %}
+    <div class="row mt-5 text-center">
+        <h1 id="demo" class="fw-bold display-1"></h1>
+    </div>
+    <div class="row d-flex mt-5 gx-md-5">
+        <div class="col-6 text-end">
+            <a href="{{ url_for('register') }}">
+                <button type="button" class="btn btn-primary btn-lg">Register</button>
+            </a>
+        </div>
+        <div class="col-6 text-start">
+            <a href="{{ url_for('login') }}">
+                <button type="button" class="btn btn-secondary btn-lg">Log in</button>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+<!-- https://www.w3schools.com/howto/howto_js_typewriter.asp -->
+<script>
+    var i = 0;
+    var txt = "Welcome to Traveller's Journal!";
+    var speed = 100;
+    
+    function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("demo").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+    }
+</script>
+
+{% endblock %}
+
